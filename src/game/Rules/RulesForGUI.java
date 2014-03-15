@@ -1,12 +1,10 @@
 package game.Rules;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class RulesForGUI {
 
     Random rr = new Random();
-    Scanner scan = new Scanner(System.in);
     int HumanAll,BotAll,HumanChoice,BotChoice,PlayersSum,SumAll,HumanThink,BotThink;
     private boolean Winner; // Чей ход true-human, false-bot
     public RulesForGUI() {

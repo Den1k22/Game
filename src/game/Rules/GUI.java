@@ -8,9 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import game.Rules. RulesForGUI;
-
 public class GUI extends JFrame {
+
     RulesForGUI g = new  RulesForGUI();
 
     private JPanel panel;
@@ -30,10 +29,13 @@ public class GUI extends JFrame {
         closeButton.setBounds(40, 50, 80, 25);
 
         JLabel label = new JLabel("You have "+g.getHumanAll()+ " stones");
-        label.setBounds(5, 5, 105, 25);
+        label.setBounds(5, 5, 105, 20);
 
-        panel.add(closeButton);
+        JLabel label2 = new JLabel("Chose how much stones you take");
+        label2.setBounds(5, 20, 205, 35);
+
         panel.add(label);
+        panel.add(label2);
         add(panel);
 
         setTitle("Derived class");
