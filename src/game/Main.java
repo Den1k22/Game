@@ -24,5 +24,4 @@ public class Main {
             g.EndStep();
         }while (g.EndGame() == true);
     }
-
 }

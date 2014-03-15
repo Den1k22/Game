@@ -2,30 +2,24 @@ package game.Rules;
 
 import java.util.Random;
 import java.util.Scanner;
-import game.Rules.GUI;
 
-public class Game {
+public class RulesForGUI {
 
     Random rr = new Random();
     Scanner scan = new Scanner(System.in);
     int HumanAll,BotAll,HumanChoice,BotChoice,PlayersSum,SumAll,HumanThink,BotThink;
     private boolean Winner; // Чей ход true-human, false-bot
-    public Game() {
+    public RulesForGUI() {
         HumanAll = 3;
         BotAll = 3;
         Winner = true;
     }
 
-    public void StartPart()
+    public void StartPart(int b)
     {
         SumAll=HumanAll + BotAll;
         System.out.println("You have " + HumanAll);
-        do
-        {
-            System.out.println("Enter stone number(It can't be more than "+HumanAll+" or less than 0 ): ");
-            String b = scan.nextLine();
-            HumanChoice = Integer.parseInt(b);
-        }while (HumanChoice > HumanAll || HumanChoice < 0);
+        HumanChoice = b;
         int aa = rr.nextInt(BotAll+1);
         BotChoice = aa;
         PlayersSum = BotChoice+HumanChoice;
@@ -51,14 +45,9 @@ public class Game {
         return game;
     }
 
-    public void AskHuman()
+    public void AskHuman(int a)
     {
-        do
-        {
-            System.out.println("Enter stone sum(It can't be more than "+SumAll+" or less than 0 ): ");
-            String b = scan.nextLine();
-            HumanThink = Integer.parseInt(b);
-        }while (HumanThink > SumAll || HumanThink < 0 || HumanThink==BotThink);
+      HumanThink = a;
     }
 
     public void AskBot()
@@ -73,24 +62,24 @@ public class Game {
 
     public void EndStep()
     {
-        System.out.println();
-        System.out.println("You have " + HumanChoice + " Bot have " + BotChoice);
         if (HumanThink == PlayersSum )
         {
             Winner = true;
             HumanAll = HumanAll -1;
-            System.out.println("You win Part");
         }
         else if ( BotThink== PlayersSum )
         {
             Winner = false;
             BotAll = BotAll -1;
-            System.out.println("Bot win Part");
         }
         else {System.out.println("Nobody win");}
     }
 
     public boolean getWinner() {
         return Winner;
+    }
+    public int getHumanAll()
+    {
+      return HumanAll;
     }
 }
