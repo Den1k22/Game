@@ -30,7 +30,7 @@ public class GUI extends JFrame {
         closeButton.setBounds(40, 50, 80, 25);
 
         JLabel label = new JLabel("You have "+g.getHumanAll()+ " stones");
-        label.setBounds(90, 50, 140, 25);
+        label.setBounds(5, 5, 105, 25);
 
         panel.add(closeButton);
         panel.add(label);
