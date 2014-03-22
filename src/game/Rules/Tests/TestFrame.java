@@ -1,84 +1,74 @@
 package game.Rules.Tests;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class TestFrame extends JFrame {
 
-    private static List<JLabel> labels = new ArrayList<JLabel>();
+    private JTextField textField;
 
-    public static void createGUI() {
-        JFrame frame = new JFrame("Test frame");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public TestFrame() {
+        super("Test frame");
+        createGUI();
+    }
 
-        final Font font = new Font("Verdana", Font.PLAIN, 25);
+    public void createGUI() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel butPanel = new JPanel();
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
 
-        JButton addButton = new JButton("+");
-        addButton.setFont(font);
-        addButton.setFocusable(false);
-        butPanel.add(addButton);
+        JButton button1 = new JButton("Button 1");
+        button1.setActionCommand("Button 1 was pressed!");
+        panel.add(button1);
 
-        JButton remButton = new JButton("-");
-        remButton.setFont(font);
-        remButton.setFocusable(false);
-        butPanel.add(remButton);
+        JButton button2 = new JButton("Button 2");
+        button2.setActionCommand("Button 2 was pressed!");
+        panel.add(button2);
 
-        final JPanel labPanel = new JPanel();
-        final JScrollPane scrollPane = new JScrollPane(labPanel);
-        labPanel.setLayout(new BoxLayout(labPanel, BoxLayout.Y_AXIS));
+        JButton button3 = new JButton("Button 3");
+        button3.setActionCommand("Button 3 was pressed!");
+        panel.add(button3);
 
-        addButton.addActionListener(new ActionListener() {
+        textField = new JTextField();
+        textField.setColumns(23);
+        panel.add(textField);
+
+        ActionListener actionListener = new TestActionListener();
+
+        button1.addActionListener(actionListener);
+        button2.addActionListener(actionListener);
+
+        button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int number = labels.size() + 1;
-                JLabel label = new JLabel("Label " + number);
-                labels.add(label);
-                label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-                label.setFont(font);
-                labPanel.add(label);
-                scrollPane.revalidate();
+                textField.setText(e.getActionCommand());
             }
         });
 
-        remButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(labels.size() > 0) {
-                    int index = labels.size() - 1;
-                    JLabel label = labels.remove(index);
-                    labPanel.remove(label);
-                    labPanel.repaint();
-                    scrollPane.revalidate();
-                }
-            }
-        });
+        getContentPane().add(panel);
+        setPreferredSize(new Dimension(320, 100));
+    }
 
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.getContentPane().add(butPanel, BorderLayout.NORTH);
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-
-        frame.setPreferredSize(new Dimension(250, 200));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    public class TestActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            textField.setText(e.getActionCommand());
+        }
     }
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame.setDefaultLookAndFeelDecorated(true);
-                createGUI();
+                TestFrame frame = new TestFrame();
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
             }
         });
     }

@@ -16,7 +16,6 @@ public class RulesForGUI {
     public void StartPart(int b)
     {
         SumAll=HumanAll + BotAll;
-        System.out.println("You have " + HumanAll);
         HumanChoice = b;
         int aa = rr.nextInt(BotAll+1);
         BotChoice = aa;
@@ -79,5 +78,10 @@ public class RulesForGUI {
     public int getHumanAll()
     {
       return HumanAll;
+    }
+
+    public int getHumanChoice()
+    {
+      return HumanChoice;
     }
 }

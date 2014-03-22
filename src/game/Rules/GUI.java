@@ -14,10 +14,27 @@ public class GUI extends JFrame {
 
     private JPanel panel;
     private  JButton closeButton;
+    private  JLabel label3 = new JLabel("");
+    int num = g.getHumanAll()+1;
+    private JButton choseButton[] = new JButton[num];
 
     public GUI() {
 
         initUI();
+        actionListener =  new TestActionListener();
+        {
+            for (int i = 0;i<=g.getHumanAll();i++)
+            {
+                choseButton[i].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int a = Integer.valueOf(((JButton) e.getSource()).getText());
+                        g.StartPart(a);
+                        System.out.println(g.getHumanChoice());
+                        label3.setName(String.valueOf(a));
+                    }
+                });
+            }
+        }
     }
 
     public final void initUI() {
@@ -25,17 +42,24 @@ public class GUI extends JFrame {
         panel = new JPanel();
         panel.setLayout(null);
 
-        closeButton = new MyButton("Close");
-        closeButton.setBounds(40, 50, 80, 25);
-
         JLabel label = new JLabel("You have "+g.getHumanAll()+ " stones");
         label.setBounds(5, 5, 105, 20);
 
         JLabel label2 = new JLabel("Chose how much stones you take");
         label2.setBounds(5, 20, 205, 35);
 
+        for (int i = 0;i<=g.getHumanAll();i++)
+        {
+          choseButton[i] = new JButton(String.valueOf(i));
+          choseButton[i].setBounds(5+(i*50),60,50,30);
+          panel.add(choseButton[i]);
+        }
+
+        label3.setBounds(5, 100, 205, 35);
+
         panel.add(label);
         panel.add(label2);
+        panel.add(label3);
         add(panel);
 
         setTitle("Derived class");
@@ -44,20 +68,29 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    class MyButton extends JButton implements ActionListener {
+    ActionListener actionListener;
 
-        public MyButton(String text) {
-            super.setText(text);
-            addActionListener(this);
-        }
-
+    public class TestActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-           // System.exit(0);
-            panel.remove(closeButton);
-        //    revalidate();
-            panel.repaint();
+            int a = Integer.valueOf(((JButton) e.getSource()).getText());
+            g.StartPart(a);
         }
     }
+
+//    class MyButton extends JButton implements ActionListener {
+//
+//        public MyButton(String text) {
+//            super.setText(text);
+//            addActionListener(this);
+//        }
+//
+//        public void actionPerformed(ActionEvent e) {
+//           // System.exit(0);
+//            panel.remove(closeButton);
+//        //    revalidate();
+//            panel.repaint();
+//        }
+//    }
 
     public static void go() {
 

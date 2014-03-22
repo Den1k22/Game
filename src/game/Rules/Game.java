@@ -16,7 +16,7 @@ public class Game {
         Winner = true;
     }
 
-    public void StartPart()
+    public void StartStep()
     {
         SumAll=HumanAll + BotAll;
         System.out.println("You have " + HumanAll);

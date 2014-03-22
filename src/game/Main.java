@@ -10,7 +10,7 @@ public class Main {
 
         do
         {
-            g.StartPart();
+            g.StartStep();
             if (g.getWinner() == true)
             {
                 g.AskHuman();
