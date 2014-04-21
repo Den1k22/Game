@@ -6,22 +6,26 @@ public class Main {
 
     public static void main(String[] args)
     {
-        Game g = new Game();
+       Game g = new Game();
+       do
+       {
+           g.NewGame();
+           do
+           {
+               g.StartStep();
+               if (g.getWinner())
+               {
+                   g.AskHuman();
+                   g.AskBot();
+               }
+               else
+               {
+                   g.AskBot();
+                   g.AskHuman();
+               }
+               g.EndStep();
+           }while (g.EndGame());
 
-        do
-        {
-            g.StartStep();
-            if (g.getWinner() == true)
-            {
-                g.AskHuman();
-                g.AskBot();
-            }
-            else
-            {
-                g.AskBot();
-                g.AskHuman();
-            }
-            g.EndStep();
-        }while (g.EndGame() == true);
+       }while(g.Restart());
     }
 }

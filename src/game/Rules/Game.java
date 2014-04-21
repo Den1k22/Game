@@ -10,7 +10,9 @@ public class Game {
     Scanner scan = new Scanner(System.in);
     int HumanAll,BotAll,HumanChoice,BotChoice,PlayersSum,SumAll,HumanThink,BotThink;
     private boolean Winner; // Чей ход true-human, false-bot
-    public Game() {
+
+    public void NewGame()
+    {
         HumanAll = 3;
         BotAll = 3;
         Winner = true;
@@ -92,5 +94,14 @@ public class Game {
 
     public boolean getWinner() {
         return Winner;
+    }
+
+    public boolean Restart()
+    {
+       boolean a = false;
+       System.out.println("Continue? y-Yes, n-No");
+       String b = scan.nextLine();
+       if( b.equals("y") || b.equals("Y")) {a = true; }
+       return a;
     }
 }
